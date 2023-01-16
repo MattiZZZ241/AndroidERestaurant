@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
         Log.d("Destroy", "Activity $this has been destroyed")
     }
 
-    fun switchActivity(textView: TextView){
+    private fun switchActivity(textView: TextView){
         val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
         intent.putExtra("titleCategory", textView.text)
         startActivity(intent)

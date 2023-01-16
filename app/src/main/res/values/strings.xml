@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">AndroidERestaurant</string>
-    <string name="element1">Element1</string>
-    <string name="element2">Element2</string>
-    <string name="element3">Element3</string>
+    <string-array name="tab_starters">
+        <item>Salade</item>
+        <item>Soupes</item>
+        <item>Tapas</item>
+    </string-array>
+    <string-array name="tab_mains">
+        <item>Hamburger</item>
+        <item>Steack et Frites</item>
+        <item>Pizza</item>
+        <item>Pâtes Carbonara</item>
+        <item>Poisson</item>
+    </string-array>
+    <string-array name="tab_desserts">
+        <item>Flan</item>
+        <item>Brownie</item>
+        <item>Café gourmand</item>
+        <item>Crêpe au Nutella</item>
+    </string-array>
 </resources>

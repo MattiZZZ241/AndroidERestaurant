@@ -5,29 +5,27 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import fr.isen.bernet.androiderestaurant.databinding.ActivityCategoryBinding
 
 class CategoryActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
+
+        binding = ActivityCategoryBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         val title = findViewById<TextView>(R.id.titleCategory)
         title.text = intent.extras?.getString("titleCategory")?:"No title available"
 
-        val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
+        binding.recyclerCategory.layoutManager = LinearLayoutManager(this)
 
-        recyclerview.layoutManager = LinearLayoutManager(this)
-
-        val data = ArrayList<ItemsViewModel>()
-
-        for (i in 1..20) {
-            data.add(ItemsViewModel(R.drawable.ic_launcher_foreground, "Item $i"))
+        when (title.text) {
+            "Entrées" -> binding.recyclerCategory.adapter = CustomAdapter(resources.getStringArray(R.array.tab_starters).toList() as ArrayList<String>)
+            "Plats" -> binding.recyclerCategory.adapter = CustomAdapter(resources.getStringArray(R.array.tab_mains).toList() as ArrayList<String>)
+            "Desserts" -> binding.recyclerCategory.adapter = CustomAdapter(resources.getStringArray(R.array.tab_desserts).toList() as ArrayList<String>)
         }
-
-        val adapter = CustomAdapter(data)
-
-        recyclerview.adapter = adapter
     }
 }

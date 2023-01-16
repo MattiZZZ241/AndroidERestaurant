@@ -1,13 +1,11 @@
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import fr.isen.bernet.androiderestaurant.ItemsViewModel
 import fr.isen.bernet.androiderestaurant.R
 
-class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -19,12 +17,9 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val ItemsViewModel = mList[position]
+        val itemsViewModel = mList[position]
 
-        holder.imageView.setImageResource(ItemsViewModel.image)
-
-        holder.textView.text = ItemsViewModel.text
-
+        holder.textView.text = itemsViewModel
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +27,6 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)
     }
 }
