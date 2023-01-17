@@ -1,11 +1,12 @@
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.bernet.androiderestaurant.R
 
-class CustomAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListener: () -> Unit) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -20,6 +21,10 @@ class CustomAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapter
         val itemsViewModel = mList[position]
 
         holder.textView.text = itemsViewModel
+
+        holder.itemView.setOnClickListener() {
+            onItemClickListener()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -27,6 +32,6 @@ class CustomAdapter(private val mList: ArrayList<String>) : RecyclerView.Adapter
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val textView: TextView = itemView.findViewById(R.id.textView)
+        val textView: TextView = itemView.findViewById(R.id.cardTitle)
     }
 }
