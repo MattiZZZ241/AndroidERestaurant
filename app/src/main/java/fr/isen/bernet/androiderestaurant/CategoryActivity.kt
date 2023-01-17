@@ -3,9 +3,14 @@ package fr.isen.bernet.androiderestaurant
 import CustomAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import fr.isen.bernet.androiderestaurant.databinding.ActivityCategoryBinding
+import org.json.JSONObject
 
 class CategoryActivity : AppCompatActivity() {
 
@@ -29,10 +34,26 @@ class CategoryActivity : AppCompatActivity() {
             "Desserts" -> resources.getStringArray(R.array.tab_desserts).toList() as ArrayList<String>
             else -> ArrayList()
         }
-        recyclerView.adapter = CustomAdapter(dishes) {
-            val intent = Intent(this, FoodDetailsActivity::class.java)
-            intent.putExtra("mealTitle", title.text)
+
+        recyclerView.adapter = CustomAdapter(arrayListOf()){
+            val intent = Intent(this@CategoryActivity, FoodDetailsActivity::class.java)
+            intent.putExtra("mealTitle", it)
             startActivity(intent)
         }
+
+        loadDishesFromAPI()
+    }
+    private fun loadDishesFromAPI() {
+        Volley.newRequestQueue(this)
+
+        val url = "http://test.api.catering.bluecodegames.com/menu"
+        val jsonObject = JSONObject()
+        jsonObject.put("id_shop", "1")
+        val jsonRequest = JsonObjectRequest(Request.Method.POST, url, jsonObject, {
+            Log.w("CategoryActivity", "response : $it")
+        }, {
+            Log.w("CategoryActivity", "erreur : $it")
+        })
+        Volley.newRequestQueue(this).add(jsonRequest)
     }
 }

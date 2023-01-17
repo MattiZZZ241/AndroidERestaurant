@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.bernet.androiderestaurant.R
 
-class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListener: () -> Unit) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListener: (mealTitle: String) -> Unit) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -23,7 +23,7 @@ class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListene
         holder.textView.text = itemsViewModel
 
         holder.itemView.setOnClickListener() {
-            onItemClickListener()
+            onItemClickListener(itemsViewModel)
         }
     }
 
