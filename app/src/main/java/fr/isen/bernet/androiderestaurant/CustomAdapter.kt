@@ -2,8 +2,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.isen.bernet.androiderestaurant.R
 import fr.isen.bernet.androidrestaurant.Data
 import fr.isen.bernet.androidrestaurant.Items
@@ -27,6 +29,13 @@ class CustomAdapter(var mList: ArrayList<Items>, val onItemClickListener: (mealT
         holder.itemView.setOnClickListener() {
             onItemClickListener(itemsViewModel)
         }
+
+        holder.price.text = itemsViewModel.prices[0].price + " €"
+
+        val firstImage = itemsViewModel.images[0]
+        if (firstImage.isNotEmpty()) {
+            Picasso.get().load(firstImage).resize(150,150).into(holder.images)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +44,8 @@ class CustomAdapter(var mList: ArrayList<Items>, val onItemClickListener: (mealT
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textView: TextView = itemView.findViewById(R.id.cardTitle)
+        val price: TextView = itemView.findViewById(R.id.priceView)
+        val images: ImageView = itemView.findViewById(R.id.imageView)
     }
 
     @SuppressLint("NotifyDataSetChanged")

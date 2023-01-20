@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">AndroidERestaurant</string>
+    <string name="uber">Uber</string>
     <string name="starters">Entrées</string>
     <string name="dishes">Plats</string>
     <string name="desserts">Desserts</string>
+    <string name="droeat">DroEat</string>
+    <string name="titleCat">Title</string>
+    <string name="item">Item</string>
     <string-array name="tab_starters">
         <item>Salade</item>
         <item>Soupes</item>
