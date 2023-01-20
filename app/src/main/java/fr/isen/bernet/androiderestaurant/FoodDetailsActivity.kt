@@ -12,7 +12,5 @@ class FoodDetailsActivity : AppCompatActivity() {
 
         binding = ActivityFoodDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.mealTitle.text = intent.extras?.getString("mealTitle")?:"No meal title available"
     }
 }

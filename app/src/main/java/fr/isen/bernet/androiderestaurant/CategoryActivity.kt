@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import fr.isen.bernet.androiderestaurant.databinding.ActivityCategoryBinding
+import fr.isen.bernet.androidrestaurant.FoodDataResult
 import org.json.JSONObject
 
 class CategoryActivity : AppCompatActivity() {
@@ -56,29 +58,17 @@ class CategoryActivity : AppCompatActivity() {
         jsonObject.put("id_shop", "1")
         val jsonRequest = JsonObjectRequest(Request.Method.POST, url, jsonObject, {
             Log.w("CategoryActivity", "response : $it")
-            /*val dataArray = jsonObject.getJSONArray("data")
-            for(i in 0 until dataArray.length()) {
-                val categoryObject = dataArray.getJSONObject(i)
-                val nameFr = categoryObject.getString("name_fr")
-                val dishesArray = categoryObject.getJSONArray("items")
-                for(j in 0 until dishesArray.length()) {
-                    val dishesObject = dishesArray.getJSONObject(j)
-                    val dishesId = dishesObject.getString("id")
-                    val nameFrDishes = dishesObject.getString("name_fr")
-                    val idCategory = dishesObject.getString("id_category")
-                    val images = dishesObject.getJSONArray("images")
-                    val ingredientsArray = dishesObject.getJSONArray("ingredients")
-                    for (k in 0 until ingredientsArray.length()) {
-                        val ingredientObject = ingredientsArray.getJSONObject(k)
-                        val ingredientNameFr = ingredientObject.getString("name_fr")
-                    }
-                }
-            }*/
+            handleAPIData(it.toString())
         }, {
             Log.w("CategoryActivity", "erreur : $it")
             Toast.makeText(this@CategoryActivity, "Erreur API", Toast.LENGTH_SHORT).show()
         })
         Volley.newRequestQueue(this).add(jsonRequest)
+    }
+
+    private fun handleAPIData(data: String) {
+        var dishesResult = Gson().fromJson(data, FoodDataResult::class.java)
+        dishesResult.data[0].nameFr
     }
 }
 
