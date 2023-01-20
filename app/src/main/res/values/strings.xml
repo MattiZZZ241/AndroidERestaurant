@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AndroidERestaurant</string>
+    <string name="starters">Entrées</string>
+    <string name="dishes">Plats</string>
+    <string name="desserts">Desserts</string>
     <string-array name="tab_starters">
         <item>Salade</item>
         <item>Soupes</item>

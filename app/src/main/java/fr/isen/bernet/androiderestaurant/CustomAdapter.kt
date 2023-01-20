@@ -1,12 +1,14 @@
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.bernet.androiderestaurant.R
+import fr.isen.bernet.androidrestaurant.Data
+import fr.isen.bernet.androidrestaurant.Items
 
-class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListener: (mealTitle: String) -> Unit) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(var mList: ArrayList<Items>, val onItemClickListener: (mealTitle: Items) -> Unit) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -20,7 +22,7 @@ class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListene
 
         val itemsViewModel = mList[position]
 
-        holder.textView.text = itemsViewModel
+        holder.textView.text = itemsViewModel.nameFr
 
         holder.itemView.setOnClickListener() {
             onItemClickListener(itemsViewModel)
@@ -33,5 +35,11 @@ class CustomAdapter(private val mList: ArrayList<String>, val onItemClickListene
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textView: TextView = itemView.findViewById(R.id.cardTitle)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun refreshList(dishesFromAPI: ArrayList<Items>) {
+        mList = dishesFromAPI
+        notifyDataSetChanged()
     }
 }

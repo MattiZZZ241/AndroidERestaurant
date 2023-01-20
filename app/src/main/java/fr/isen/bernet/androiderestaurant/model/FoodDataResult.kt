@@ -7,4 +7,4 @@ data class FoodDataResult (
 
   @SerializedName("data" ) var data : ArrayList<Data> = arrayListOf()
 
-)
+) : java.io.Serializable

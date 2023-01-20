@@ -35,13 +35,6 @@ class CategoryActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val dishes = when (title.text) {
-            "Entrées" -> resources.getStringArray(R.array.tab_starters).toList() as ArrayList<String>
-            "Plats" -> resources.getStringArray(R.array.tab_mains).toList() as ArrayList<String>
-            "Desserts" -> resources.getStringArray(R.array.tab_desserts).toList() as ArrayList<String>
-            else -> ArrayList()
-        }
-
         recyclerView.adapter = CustomAdapter(arrayListOf()){
             val intent = Intent(this@CategoryActivity, FoodDetailsActivity::class.java)
             intent.putExtra("mealTitle", it)
@@ -67,8 +60,15 @@ class CategoryActivity : AppCompatActivity() {
     }
 
     private fun handleAPIData(data: String) {
-        var dishesResult = Gson().fromJson(data, FoodDataResult::class.java)
-        dishesResult.data[0].nameFr
+        val dishesResult = Gson().fromJson(data, FoodDataResult::class.java)
+        val dishes = dishesResult.data.firstOrNull() {
+            it.nameFr == (intent.extras?.getString("titleCategory") ?: "No title available")
+        }
+
+        val adapter = binding.recyclerCategory.adapter as CustomAdapter
+        if (dishes != null) {
+            adapter.refreshList(dishes.items)
+        }
     }
 }
 
