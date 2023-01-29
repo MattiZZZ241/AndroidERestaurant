@@ -7,6 +7,9 @@
     <string name="droeat">DroEat</string>
     <string name="titleCat">Title</string>
     <string name="item">Item</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="icon">icon</string>
     <string-array name="tab_starters">
         <item>Salade</item>
         <item>Soupes</item>

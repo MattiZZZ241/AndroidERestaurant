@@ -22,9 +22,6 @@ class CategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-        supportActionBar?.hide()
-
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,7 +34,7 @@ class CategoryActivity : AppCompatActivity() {
 
         recyclerView.adapter = CustomAdapter(arrayListOf()){
             val intent = Intent(this@CategoryActivity, FoodDetailsActivity::class.java)
-            intent.putExtra("mealTitle", it)
+            intent.putExtra("item", it)
             startActivity(intent)
         }
 
