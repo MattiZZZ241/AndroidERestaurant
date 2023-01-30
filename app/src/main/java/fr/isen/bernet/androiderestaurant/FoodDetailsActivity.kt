@@ -3,7 +3,6 @@ package fr.isen.bernet.androiderestaurant
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.GsonBuilder
@@ -21,12 +20,7 @@ class FoodDetailsActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         absTopSubMenus = menu
         menuInflater.inflate(R.menu.main_menu, menu)
-        val cartItem = menu?.findItem(R.id.action_cart)
-        val cartView = cartItem?.actionView
 
-        cartView?.setOnClickListener {
-            onOptionsItemSelected(cartItem)
-        }
         return true
     }
 
@@ -45,17 +39,17 @@ class FoodDetailsActivity : AppCompatActivity() {
             binding.ingredientsText.text = binding.ingredientsText.text.toString() + i.nameFr + ", "
         }
 
-        binding.buttonPlus.setOnClickListener() {
+        binding.buttonPlus.setOnClickListener {
             clickOnButtonPlus()
             refreshTotalPrice()
-        };
+        }
 
-        binding.buttonMinus.setOnClickListener() {
+        binding.buttonMinus.setOnClickListener {
             clickOnButtonMinus()
             refreshTotalPrice()
         }
 
-        binding.totalPrice.setOnClickListener() {
+        binding.totalPrice.setOnClickListener {
             refreshTotalPrice()
             addToJSON()
         }
@@ -71,7 +65,7 @@ class FoodDetailsActivity : AppCompatActivity() {
         binding.dishNumber.text = (binding.dishNumber.text.toString().toInt() + 1).toString()
     }
 
-    fun clickOnButtonMinus() {
+    private fun clickOnButtonMinus() {
         if (binding.dishNumber.text.toString().toInt() > 0) {
             binding.dishNumber.text = (binding.dishNumber.text.toString().toInt() - 1).toString()
         }
@@ -86,7 +80,7 @@ class FoodDetailsActivity : AppCompatActivity() {
             ?: 999)).toString() + " €"
     }
 
-    fun addToJSON() {
+    private fun addToJSON() {
         val file = File(filesDir, "cart.json")
         val jsonCart = JSONObject()
         jsonCart.put("name", dish.nameFr)

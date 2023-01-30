@@ -4,7 +4,6 @@ import CustomAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,7 +57,7 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun handleAPIData(data: String) {
         val dishesResult = Gson().fromJson(data, FoodDataResult::class.java)
-        val dishes = dishesResult.data.firstOrNull() {
+        val dishes = dishesResult.data.firstOrNull {
             it.nameFr == (intent.extras?.getString("titleCategory") ?: "No title available")
         }
 

@@ -10,6 +10,7 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="icon">icon</string>
+    <string name="cart">Cart</string>
     <string-array name="tab_starters">
         <item>Salade</item>
         <item>Soupes</item>
